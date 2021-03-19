@@ -1,34 +1,9 @@
 <?php
-include('parseDown.php');
-
-class Parse{
-        public $dataMd;
-        public function parse($Path)
-    {
-        $contents = file_get_contents($Path);
-        $Parsedown = new Parsedown();
-        $Parsedown->setMarkupEscaped(true);
-        $this->dataMd = $Parsedown->text($contents);
-    }
-
-
-}
-$contents = new Parse();
-$contents->parse("questions.md");
-$contents->dataMd;
-// end read file md
-// start save data (questions)
-class saveQuestions{
-    function get_string_between($string, $start){
-        $regex = $display = explode($start, $string);
-        return $regex;
-    }
-}
 class Question{
     private $parsed;
     //start method removetag
     public function removeTag($string){
-       return str_replace(array('<details><summary><b>', '</b></summary>', '</p>
+        return str_replace(array('<details><summary><b>', '</b></summary>', '</p>
 </details>', '<p>'), "", $string);
     }
     //end method removetag
@@ -75,9 +50,5 @@ class Question{
 
     }
 
-    }
-
-$question = new Question;
-//$question->save("questions.md", "questions.txt", 0);
-//$question->all("questions.txt");
-$question->fuzzySearch("new Boolean(false);");
+}
+?>
