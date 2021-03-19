@@ -12,7 +12,7 @@ class Question{
     public function save($pathMd, $pathSave, int $numQue = 0)
     {
 
-        $question = new saveQuestions();
+        $question = new SaveQuestion();
         $file = file_get_contents($pathMd);
         $this->parsed = $question->get_string_between($file, '######');
         $myfile = fopen($pathSave, "w")or die("Unable to open file!");
@@ -38,7 +38,7 @@ class Question{
     //end method all
     //start method fuzzySearch
     public function fuzzySearch($searchKey){
-        $question = new saveQuestions();
+        $question = new SaveQuestion();
         $file = file_get_contents("questions.md");
         $questions = $question->get_string_between($file, '######');
         for ($x =1; $x < count($questions); $x++){
