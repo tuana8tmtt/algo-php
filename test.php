@@ -1,11 +1,14 @@
 <?php
 include('parseDown.php');
-require_once('Parse.class.php');
-require_once('Question.class.php');
-require_once('saveQuestions.class.php');
+require_once ('MarkDownFIle.php');
+require_once('ExplodeString.php');
+require_once('Question.php');
 
 
 
 
-$question = new Question;
-$question->fuzzySearch("new Boolean(false);");
+
+//$parsed = new Question();
+//print_r($parsed->fuzzySearch("gì sẽ xảy ra"));
+//$content = new MarkDownFIle("questions.md");
+//echo $content->dataMd;
