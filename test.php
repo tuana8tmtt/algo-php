@@ -17,7 +17,7 @@ $questions->getQuestions("questions.md" );
 //    echo '<b style="font-size: 16px">'.$question->content.'</b></br>';
 //    echo '<b style="font-size: 16px">'.$question->answer.'</b></br>';
 //}
-foreach ($questions->fuzzySearch("cool_secret") as $key){
+foreach ($questions->fuzzySearch("Out") as $key){
     echo $questions->questions[$key]->content;
     echo $questions->questions[$key]->answer.'</br>';
 

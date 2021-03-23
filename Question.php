@@ -12,7 +12,7 @@ class Question
 </details>', '<p>'), "", $string);
     }
 
-    public function __construct($pathMd, int $numQue = 0)
+    public function getQuestion($pathMd, int $numQue = 0)
     {
 
         $forExplode = new ExplodeString();
