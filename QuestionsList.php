@@ -3,27 +3,19 @@
 class QuestionsList
 {
     public $questions = [];
-    public $dataMd;
     public function removeTag($string)
     {
         return str_replace(array('<details><summary><b>', '</b></summary>', '</p>
 </details>', '<p>'), "", $string);
     }
-    public function parse($Path)
-    {
-        $contents = file_get_contents($Path);
-        $Parsedown = new Parsedown();
-        $Parsedown->setMarkupEscaped(true);
-        $this->dataMd = $Parsedown->text($contents);
-    }
-    public function saveQuestions($pathSave, $data)
-    {
-        $myfile = fopen($pathSave, "w") or die("Unable to open file!");
-        fwrite($myfile, json_encode($data, JSON_PRETTY_PRINT),);
-        fclose($myfile);
-    }
+//    public function saveQuestions($pathSave, $data)
+//    {
+//        $myfile = fopen($pathSave, "w") or die("Unable to open file!");
+//        fwrite($myfile, json_encode($data, JSON_PRETTY_PRINT),);
+//        fclose($myfile);
+//    }
 
-    public function getQuestions($pathMd, $pathSave)
+    public function getQuestions($pathMd)
     {
         $forExplode = new ExplodeString();
         $file = file_get_contents($pathMd);
@@ -38,26 +30,24 @@ class QuestionsList
             ];
              array_push($this->questions, $arrayEachQues);
         }
-        $this->saveQuestions($pathSave, $this->questions);
-
     }
-    public function showAllQues($pathSave)
+    public function showAllQues()
     {
-        $lines = file($pathSave);
+        $allQues = $this->questions;
 
-        foreach($lines as $line){
-            echo $line."</br>";
+        foreach($allQues as $question){
+            echo '<b style="font-size: 16px">'.$question['content'].'</b></br>';
+            echo '<b style="font-size: 16px">'.$question['answer'].'</b></br>';
         }
     }
     public function fuzzySearch($searchKey)
     {
         $tempSearch = [];
-        $content = json_decode(file_get_contents("questions.json"), JSON_PRETTY_PRINT);
-        foreach ($content as $key => $val) {
+        foreach ($this->questions as $key => $val) {
             if (strpos($val['content'], $searchKey) != false) {
-                array_push($tempSearch,$content[$key]);
+                array_push($tempSearch,$this->questions[$key]);
             }
         }
-        return $tempSearch;
+       return $tempSearch;
     }
 }
