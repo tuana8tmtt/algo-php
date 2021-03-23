@@ -21,8 +21,6 @@ class QuestionsList
         $file = file_get_contents($pathMd);
         $TempExplodeQues = $forExplode->getStringBetween($file, '######');
         for ($x = 1; $x < count($TempExplodeQues); $x++) {
-            $tempQues = $this->removeTag($TempExplodeQues[$x]);
-            $explodeQues = $forExplode->getStringBetween($tempQues, "Đáp án");
             $question = new Question($pathMd,$x);
             array_push($this->questions, $question);
         }
