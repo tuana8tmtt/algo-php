@@ -33,12 +33,7 @@ class QuestionsList
     }
     public function showAllQues()
     {
-        $allQues = $this->questions;
-
-        foreach($allQues as $question){
-            echo '<b style="font-size: 16px">'.$question['content'].'</b></br>';
-            echo '<b style="font-size: 16px">'.$question['answer'].'</b></br>';
-        }
+        return $this->questions;
     }
     public function fuzzySearch($searchKey)
     {
