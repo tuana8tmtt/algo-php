@@ -23,13 +23,10 @@ class QuestionsList
         for ($x = 1; $x < count($TempExplodeQues); $x++) {
             $tempQues = $this->removeTag($TempExplodeQues[$x]);
             $explodeQues = $forExplode->getStringBetween($tempQues, "Đáp án");
-            $arrayEachQues = [
-                'number' => $x,
-                'content' => $explodeQues[0],
-                'answer' => $explodeQues[2]
-            ];
-             array_push($this->questions, $arrayEachQues);
+            $question = new Question($pathMd,$x);
+            array_push($this->questions, $question);
         }
+        return $this->questions;
     }
     public function showAllQues()
     {
@@ -39,8 +36,9 @@ class QuestionsList
     {
         $tempSearch = [];
         foreach ($this->questions as $key => $val) {
-            if (strpos($val['content'], $searchKey) != false) {
-                array_push($tempSearch,$this->questions[$key]);
+            if (strpos($val->content, $searchKey) != false) {
+
+                array_push($tempSearch,$key);
             }
         }
        return $tempSearch;
