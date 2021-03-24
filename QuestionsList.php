@@ -3,34 +3,21 @@
 class QuestionsList
 {
     public $questions = [];
-    public function removeTag($string)
-    {
-        return str_replace(array('<details><summary><b>', '</b></summary>', '</p>
-</details>', '<p>'), "", $string);
-    }
-//    public function saveQuestions($pathSave, $data)
-//    {
-//        $myfile = fopen($pathSave, "w") or die("Unable to open file!");
-//        fwrite($myfile, json_encode($data, JSON_PRETTY_PRINT),);
-//        fclose($myfile);
-//    }
-
-    public function getQuestions($pathMd)
+    public function get($pathMd)
     {
         $forExplode = new ExplodeString();
         $file = file_get_contents($pathMd);
         $TempExplodeQues = $forExplode->getStringBetween($file, '######');
         for ($x = 1; $x < count($TempExplodeQues); $x++) {
-            $question = new Question();
-            $tempQues = $this->removeTag($TempExplodeQues[$x]);
+            $tempQues = str_replace(array('<details><summary><b>', '</b></summary>', '</p>
+</details>', '<p>'), "", $TempExplodeQues[$x]);
             $explodeQues = $forExplode->getStringBetween($tempQues, "Đáp án");
-            $question->content = $explodeQues[0];
-            $question->answer = $explodeQues[2];
+            $question = new Question($explodeQues[0], $explodeQues[2]);
             array_push($this->questions, $question);
         }
         return $this->questions;
     }
-    public function showAllQues()
+    public function show()
     {
         return $this->questions;
     }
