@@ -21,7 +21,7 @@ class QuestionsList
         return $this->questions;
     }
     function getStringBetween($string, $start){
-        $regex = $display = explode($start, $string);
+        $regex  = explode($start, $string);
         return $regex;
     }
     public function fuzzySearch($searchKey)
